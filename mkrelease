@@ -1,0 +1,55 @@
+; Script for generating a release archive
+
+make all
+
+set lz4dir lz4-r123
+set destdir RAM:mkrelease
+set fullvers `version file lz4.library`
+set numvers `cut "$fullvers" word 2`
+
+delete all force ${destdir}
+makedir all force ${destdir}/lz4_lib-$numvers/Libs
+makedir all force ${destdir}/lz4_lib-$numvers/SDK/local/newlib/include/proto
+makedir all force ${destdir}/lz4_lib-$numvers/SDK/local/newlib/include/interfaces
+makedir all force ${destdir}/lz4_lib-$numvers/SDK/local/newlib/include/inline4
+makedir all force ${destdir}/lz4_lib-$numvers/SDK/local/newlib/include/libraries
+
+copy clone Install ${destdir}/lz4_lib-$numvers
+copy clone LICENSE ${destdir}/lz4_lib-$numvers
+copy clone ${lz4dir}/LICENSE ${destdir}/lz4_lib-$numvers/LICENSE-LZ4
+copy clone releasenotes ${destdir}/lz4_lib-$numvers
+copy clone lz4.library ${destdir}/lz4_lib-$numvers/Libs
+copy clone include/proto/lz4.h ${destdir}/lz4_lib-$numvers/SDK/local/newlib/include/proto
+copy clone include/interfaces/lz4.h ${destdir}/lz4_lib-$numvers/SDK/local/newlib/include/interfaces
+copy clone include/inline4/lz4.h ${destdir}/lz4_lib-$numvers/SDK/local/newlib/include/inline4
+copy clone include/libraries/lz4.h ${destdir}/lz4_lib-$numvers/SDK/local/newlib/include/libraries
+copy clone ${lz4dir}/lz4.h ${destdir}/lz4_lib-$numvers/SDK/local/newlib/include
+copy clone ${lz4dir}/lz4hc.h ${destdir}/lz4_lib-$numvers/SDK/local/newlib/include
+
+sed "s/lz4_lib-xx.xx/lz4_lib-$numvers/g" AutoInstall > ${destdir}/AutoInstall
+
+echo "Short:        LZ4 implemented as a shared library"  > ${destdir}/lz4_lib-$numvers/lz4_lib.readme
+echo "Author:       Fredrik Wikstrom"                    >> ${destdir}/lz4_lib-$numvers/lz4_lib.readme
+echo "Uploader:     Fredrik Wikstrom <fredrik@a500.org>" >> ${destdir}/lz4_lib-$numvers/lz4_lib.readme
+echo "Type:         util/libs"                           >> ${destdir}/lz4_lib-$numvers/lz4_lib.readme
+echo "Version:      $numvers"                            >> ${destdir}/lz4_lib-$numvers/lz4_lib.readme
+echo "Architecture: ppc-amigaos"                         >> ${destdir}/lz4_lib-$numvers/lz4_lib.readme
+echo ""                                                  >> ${destdir}/lz4_lib-$numvers/lz4_lib.readme
+type README                                              >> ${destdir}/lz4_lib-$numvers/lz4_lib.readme
+
+copy clone ENV:Sys/def_drawer.info ${destdir}/lz4_lib-$numvers.info
+copy clone ENV:Sys/def_install.info ${destdir}/lz4_lib-$numvers/Install.info
+copy clone ENV:Sys/def_ascii.info ${destdir}/lz4_lib-$numvers/lz4_lib.readme.info
+copy clone ENV:Sys/def_ascii.info ${destdir}/lz4_lib-$numvers/LICENSE.info
+copy clone ENV:Sys/def_ascii.info ${destdir}/lz4_lib-$numvers/LICENSE-LZ4.info
+copy clone ENV:Sys/def_ascii.info ${destdir}/lz4_lib-$numvers/releasenotes.info
+
+changetooltype ${destdir}/lz4_lib-$numvers/Install.info ADD "APPNAME=lz4.library"
+
+delete force RAM:lz4_lib.lha
+lha a -x -r RAM:lz4_lib.lha ${destdir}/
+
+echo "RAM:lz4_lib.lha created"
+
+copy clone ${destdir}/lz4_lib-$numvers/lz4_lib.readme RAM:
+
