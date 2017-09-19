@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<!DOCTYPE library SYSTEM "library.dtd">
+<library name="lz4" basename="LZ4Base" basetype="LZ4Base" openname="lz4.library">
+	<include>libraries/lz4.h</include>
+	<interface name="main" version="1.0" flags="protected" struct="LZ4IFace" prefix="_main_" global="ILZ4">
+		<method name="Obtain" result="uint32"/>
+		<method name="Release" result="uint32"/>
+		<method name="Expunge" result="void" status="unimplemented"/>
+		<method name="Clone" result="struct Interface *" status="unimplemented"/>
+
+		<method name="LZ4_versionNumber" result="int32"/>
+
+		<method name="LZ4_compress" result="int32">
+			<arg name="source" type="CONST_APTR"/>
+			<arg name="dest" type="APTR"/>
+			<arg name="sourceSize" type="int32"/>
+		</method>
+
+		<method name="LZ4_decompress_safe" result="int32">
+			<arg name="source" type="CONST_APTR"/>
+			<arg name="dest" type="APTR"/>
+			<arg name="compressedSize" type="int32"/>
+			<arg name="maxDecompressedSize" type="int32"/>
+		</method>
+
+		<method name="LZ4_compressBound" result="int32">
+			<arg name="isize" type="int32"/>
+		</method>
+
+		<method name="LZ4_compress_limitedOutput" result="int32">
+			<arg name="source" type="CONST_APTR"/>
+			<arg name="dest" type="APTR"/>
+			<arg name="sourceSize" type="int32"/>
+			<arg name="maxOutputSize" type="int32"/>
+		</method>
+
+		<method name="LZ4_decompress_fast" result="int32">
+			<arg name="source" type="CONST_APTR"/>
+			<arg name="dest" type="APTR"/>
+			<arg name="originalSize" type="int32"/>
+		</method>
+
+		<method name="LZ4_decompress_safe_partial" result="int32">
+			<arg name="source" type="CONST_APTR"/>
+			<arg name="dest" type="APTR"/>
+			<arg name="compressedSize" type="int32"/>
+			<arg name="targetOutputSize" type="int32"/>
+			<arg name="maxDecompressedSize" type="int32"/>
+		</method>
+
+		<method name="LZ4_compressHC" result="int32">
+			<arg name="source" type="CONST_APTR"/>
+			<arg name="dest" type="APTR"/>
+			<arg name="inputSize" type="int32"/>
+		</method>
+
+		<method name="LZ4_compressHC_limitedOutput" result="int32">
+			<arg name="source" type="CONST_APTR"/>
+			<arg name="dest" type="APTR"/>
+			<arg name="inputSize" type="int32"/>
+			<arg name="maxOutputSize" type="int32"/>
+		</method>
+
+		<method name="LZ4_compressHC2" result="int32">
+			<arg name="source" type="CONST_APTR"/>
+			<arg name="dest" type="APTR"/>
+			<arg name="inputSize" type="int32"/>
+			<arg name="compressionLevel" type="int32"/>
+		</method>
+
+		<method name="LZ4_compressHC2_limitedOutput" result="int32">
+			<arg name="source" type="CONST_APTR"/>
+			<arg name="dest" type="APTR"/>
+			<arg name="inputSize" type="int32"/>
+			<arg name="maxOutputSize" type="int32"/>
+			<arg name="compressionLevel" type="int32"/>
+		</method>
+
+		<method name="LZ4_sizeofStateHC" result="int32"/>
+
+		<method name="LZ4_compressHC_withStateHC" result="int32">
+			<arg name="state" type="APTR"/>
+			<arg name="source" type="CONST_APTR"/>
+			<arg name="dest" type="APTR"/>
+			<arg name="inputSize" type="int32"/>
+		</method>
+
+		<method name="LZ4_compressHC_limitedOutput_withStateHC" result="int32">
+			<arg name="state" type="APTR"/>
+			<arg name="source" type="CONST_APTR"/>
+			<arg name="dest" type="APTR"/>
+			<arg name="inputSize" type="int32"/>
+			<arg name="maxOutputSize" type="int32"/>
+		</method>
+
+		<method name="LZ4_compressHC2_withStateHC" result="int32">
+			<arg name="state" type="APTR"/>
+			<arg name="source" type="CONST_APTR"/>
+			<arg name="dest" type="APTR"/>
+			<arg name="inputSize" type="int32"/>
+			<arg name="compressionLevel" type="int32"/>
+		</method>
+
+		<method name="LZ4_compressHC2_limitedOutput_withStateHC" result="int32">
+			<arg name="state" type="APTR"/>
+			<arg name="source" type="CONST_APTR"/>
+			<arg name="dest" type="APTR"/>
+			<arg name="inputSize" type="int32"/>
+			<arg name="maxOutputSize" type="int32"/>
+			<arg name="compressionLevel" type="int32"/>
+		</method>
+	</interface>
+</library>

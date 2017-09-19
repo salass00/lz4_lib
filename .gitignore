@@ -1,0 +1,5 @@
+# Ignore object and archive files
+*.[oa]
+# Ignore generated exe files
+lz4.library
+lz4.library.debug
