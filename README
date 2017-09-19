@@ -1,0 +1,20 @@
+An AmigaOS shared library implementation of Yann Collet's liblz4. Currently it
+is based on the r123 release.
+
+Link to the original LZ4 repo:
+https://github.com/lz4/lz4
+
+Installation:
+
+Copy Libs/lz4.library LIBS:
+
+Source code:
+
+The source code for current and older versions is available on github:
+
+https://github.com/salass00/lz4_lib
+
+Changes:
+
+For a list of changes in this and earlier versions see the releasenotes file.
+
