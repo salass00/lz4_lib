@@ -1,0 +1,4 @@
+; AutoInstall script for AmiUpdate
+
+CopyStore lz4_lib-xx.xx/Libs/lz4.library LIBS:
+
