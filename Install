@@ -1,0 +1,10 @@
+(welcome)
+(set @default-dest "LIBS:")
+(copylib
+	(prompt "Copying lz4.library")
+	(help @copylib-help)
+	(source "Libs/lz4.library")
+	(dest @default-dest)
+	(confirm)
+)
+(exit)
